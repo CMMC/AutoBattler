@@ -1,0 +1,7 @@
+# exclude generated files
+out/
+
+# ignore IDE-specific files
+# for IntelliJ IDEA
+.idea/
+*.iml
