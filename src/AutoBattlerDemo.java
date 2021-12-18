@@ -25,18 +25,23 @@ public class AutoBattlerDemo {
     }
 
     private static void startBattle() {
+        // TODO: starts with fighter with the highest speed
         int startWith = (int)(Math.random() * 10) % 2;
-        Fighter attacker = fighters[startWith % 2];
+        Fighter attacker;
         Fighter defender;
-                // defender = fighters[(startWith + 1) % 2];
 
-        while( canDoBattle() ){
+        /*
+            Since each fighter's have its current health equals to it non-zero positive max health there will always
+            ba at least one round, opting to a do-while instead of a while loop
+        */
+        do{
+            // TODO: randomized targeting
             attacker = fighters[startWith % 2];
             defender = fighters[(startWith + 1) % 2];
 
             int defenderCurrentHealthBeforeDamage = defender.getCurrentHealth();
 
-            attacker.dealDamage(defender);
+            attacker.dealDamageTo(defender);
 
             System.out.println(attacker.getName()
                     + " dealt "
@@ -51,7 +56,10 @@ public class AutoBattlerDemo {
             System.out.println("\n");
 
             startWith++;
-        }
+        } while( canDoBattle() );
+        //while( canDoBattle() ){
+
+        //}
 
         System.out.println(attacker.getName() + " wins the battle!");
     }

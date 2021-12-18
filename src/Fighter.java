@@ -1,12 +1,19 @@
+// TODO: balancing of stats such that it has a combined limit of a number
+// TODO: speed, skills
+// TODO: will do different actions
 public class Fighter {
     enum MOVE_SET{
         ATTACK,
         DEFENSE,
-        IDLE
+        SKILL,
+        IDLE    // cannot be used when attacking
     }
 
     private String name;
-    private int attack, defense, currentHealth, maxHealth;
+    private int attack,
+                defense,
+                currentHealth,
+                maxHealth;
 
     // Random stats
     public Fighter(String name) {
@@ -25,7 +32,7 @@ public class Fighter {
         return this.currentHealth;
     }
 
-    public void dealDamage(Fighter opponent) {
+    public void dealDamageTo(Fighter opponent) {
         opponent.takeDamage( opponent.calculateDamage( this.attack ) );
     }
 
@@ -48,7 +55,7 @@ public class Fighter {
     private int calculateDamage(int opponentAttack) {
         int damageReceived = opponentAttack - defense;
 
-        // damage should be minimum of 1 regardless of defense
+        // damage should be minimum of 1 regardless of calculated damage
         if (damageReceived <= 0)
             damageReceived = 1;
 
